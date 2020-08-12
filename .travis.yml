@@ -40,4 +40,4 @@ after_success:
 deploy:
  provider: heroku
   api_key: $HEROKU_API_KEY
-  app: nk-spring-boot-app
+  app: springboot-app-123131
