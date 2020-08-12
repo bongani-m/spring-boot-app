@@ -1,6 +1,6 @@
 sudo: required
 language: java
-jdk: oraclejdk8
+jdk: openjdk8
 services:
 - docker
 env:
@@ -12,7 +12,7 @@ env:
   - COMMIT=${TRAVIS_COMMIT::7}
 addons:
   sonarcloud:
-    organization: "nitesh009-github"
+    organization: "a86b2c20-30ab-4ed7-acb6dc0db3954cdd"
     token:
       secure: $SONAR_TOKEN
 
@@ -31,13 +31,13 @@ after_success:
 - docker login -u $DOCKER_USER -p $DOCKER_PASS
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH
   ; fi`
-- export IMAGE_NAME=nitesh009/spring-boot
+- export IMAGE_NAME=bonganimbigi/spring-boot-app
 - docker build -t $IMAGE_NAME:$COMMIT .
 - docker tag $IMAGE_NAME:$COMMIT $IMAGE_NAME:$TAG
 - docker push $IMAGE_NAME
 
 #
-#deploy:
- # provider: heroku
-  # api_key: $HEROKU_API_KEY
-  # app: nk-spring-boot-app
+deploy:
+ provider: heroku
+  api_key: $HEROKU_API_KEY
+  app: nk-spring-boot-app
